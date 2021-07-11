@@ -1,118 +1,100 @@
-<<<<<<< HEAD
-<script src="../build/source/echarts.js" type="text/javascript"></script>   //echarts文件
-<div style='background: #fff;width:900px;height:400px;margin:10px auto;'>
-<div id="div1" style="width:900px;height:400px;border:1px solid #fff;margin:10px auto;background: #fff"></div>
-</div>    //折线图背景（如果两个折线图放一起的话，两个div名称要不一样 ）
-<script type="text/javascript">
-    require.config({
-        paths: {
-            echarts: '../build/dist' //引用资源文件夹路径，注意路径
-        }
-    });
-    require(
-        [
-            'echarts',
-            'echarts/chart/line'   // 按需加载所需图表，用到什么类型就加载什么类型，这里不需要考虑路径        
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="dist/echarts.min.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+
+    var symbolSize = 20;
+    var data = [[15, 0], [-50, 10], [-56.5, 20], [-46.5, 30], [-22.1, 40]];
+
+    var myChart = echarts.init(document.getElementById('main'));
+
+    myChart.setOption({
+        tooltip: {
+            triggerOn: 'none',
+            formatter: function (params) {
+                return 'X: ' + params.data[0].toFixed(2) + '<br>Y: ' + params.data[1].toFixed(2);
+            }
+        },
+        xAxis: {
+            min: -100,
+            max: 80,
+            type: 'value',
+            axisLine: {onZero: false}
+        },
+        yAxis: {
+            min: -30,
+            max: 60,
+            type: 'value',
+            axisLine: {onZero: false}
+        },
+        series: [
+            {
+                id: 'a',
+                type: 'line',
+                smooth: true,
+                symbolSize: symbolSize,
+                data: data
+            }
         ],
-        function (ec) {
-            var myChart = ec.init(document.getElementById('div1'));   //当前折线图的容器(两个折线图放一个页面时,div名称不一样)
-            var ecConfig = require('echarts/config');
-            var option = {
-                title: {
-                    text: '折线图名称',    //统计图标题名称
-                    subtext:'副标题',                  //副标题      
-                    x: 'center'                            
+    });
+
+    myChart.setOption({
+        graphic: echarts.util.map(data, function (item, dataIndex) {
+            return {
+                type: 'circle',
+                position: myChart.convertToPixel('grid', item),
+                shape: {
+                    r: symbolSize / 2
                 },
-                tooltip: {   //提示框
-                    trigger: 'axis',  //触发类型  axis：坐标轴触发  item：项目触发
-                    formatter: function (data) {        //自定义提示框 （参数自定义）
-                            var r=data[0].data*10;
-                            r=r.toFixed(2);  //保留两位小数
-                            return data[0].name+'<br/>'+data[0].seriesName+'的销售量为：'+data[0].data+'<br/>利润为：'+r+'元';
-                     }
-                     /*  axis类型时  data是多个系列的数据数组
-                     data[0].name   横坐标
-                     data[0].seriesName   图例名称
-                     data[0].data   纵坐标
-                     
-                     item类型时不是数组
-                     */
-                    
-                },
-                legend: {  //图例
-                    data: ['三只松鼠'],
-                    y: "bottom"
-                },
-                toolbox: {   //工具箱
-                    show: true, //是否显示工具箱
-                    saveAsImage: {} ,//下载工具
-                    feature: {
-                        mark: { show: true },  //辅助线开关
-                        dataView: { show: true, readOnly: false },  //数据视图
-                        magicType: { show: true, type: ['line', 'bar', 'stack', 'tiled'] },
-                        restore: { show: true },   //还原
-                        saveAsImage: { show: true }  //保存为图片
-                    }
-                },
-                //calculable: true,   折线图、柱状图是否叠加
-                xAxis: [{  //x轴
-                    type: 'category',
-                    boundaryGap: false,   //拐点起始位置  false 从头开始； ture 从中间开始
-                    data: ['一月份', '二月份', '三月份', '四月份', '五月份']
-                   axisLabel: {
-                                show: true,
-                                textStyle: {
-                                    fontSize: 14,    // 改变x轴字体大小
-                                    color: 'red'       // 改变x轴字体颜色
-                                }
-                            }
-                }],
-                yAxis: [{   //y轴
-                    type: 'value'
-                    /*min:0, // 设置y轴刻度的最小值
-                    max:1800,  // 设置y轴刻度的最大值
-                    splitNumber:9,  // 设置y轴刻度间隔个数
-                    */
-                }
-                ],
-                series: [
-                    {
-                        name: '三只松鼠',
-                        type: 'line',  //线条
-                        smooth:0.5, //设置直线弧度 0-1之间
-                        /*symbol:none  拐点消失
-                         symbolSize:8   拐点圆点大小
-                         itemStyle:{
-                                    normal:{
-                                        label : {
-                                        show: true// 拐点上显示数值
-                                    }
-                                }
-                                }
-                       lineStyle:{
-                            width:5,  // 设置线宽
-                            type:'dotted'  //'dotted'虚线 'solid'实线
-                        }
-                         */
-                        stack: '总量',  //多线条显示不对时把这个去掉
-                        data:['1000','2000','2000','5000','3000']
-                    }
-                ]
+                invisible: true,
+                draggable: true,
+                ondrag: echarts.util.curry(onPointDragging, dataIndex),
+                onmousemove: echarts.util.curry(showTooltip, dataIndex),
+                onmouseout: echarts.util.curry(hideTooltip, dataIndex),
+                z: 100
             };
-            myChart.setOption(option);
-            //添加点击事件
-            function eConsole(param) {
+        })
+    });
 
-                //alert(option.series[0].data.length);  //长度
+    window.addEventListener('resize', function () {
+        myChart.setOption({
+            graphic: echarts.util.map(data, function (item, dataIndex) {
+                return {
+                    position: myChart.convertToPixel('grid', item)
+                };
+            })
+        });
+    });
 
-                //alert(option.series[0].data[i]);   //内容
+    function showTooltip(dataIndex) {
+        myChart.dispatchAction({
+            type: 'showTip',
+            seriesIndex: 0,
+            dataIndex: dataIndex
+        });
+    }
 
-                //param.dataIndex 获取当前点击索引，
+    function hideTooltip(dataIndex) {
+        myChart.dispatchAction({
+            type: 'hideTip'
+        });
+    }
 
-                var index=param.dataIndex;
-              }
-            myChart.on("click", eConsole);
-        }
-    );
+    function onPointDragging(dataIndex, dx, dy) {
+        data[dataIndex] = myChart.convertFromPixel('grid', this.position);
+        myChart.setOption({
+            series: [{
+                id: 'a',
+                data: data
+            }]
+        });
+    }
+
 </script>
-=======
+</body>
+</html>

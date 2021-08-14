@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>贪吃蛇</title>
+    <link rel="stylesheet" type="text/css" href="C:\Users\雪\Desktop\lingling86.github.io\text.css">
+    <script src="game.js">
+    </script>
+</head>
+
+<body>
+    <div id="page">
+        <div id="yard">
+            <canvas id="canvas" height="600px" width="800px"></canvas>
+        </div>
+        <div id="help">
+            <div id="mark">得分：<span id="mark_con"></span></div>
+            <div id="helper">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button οnclick="keydown(38);">上</button>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button οnclick="keydown(37);">左</button>
+                        </td>
+                        <td>
+                            <button οnclick="keydown(80);" id="pause">暂停</button>
+                        </td>
+                        <td>
+                            <button οnclick="keydown(39);">右</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button οnclick="keydown(40);">下</button>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table><a href="index.html">再玩一次</a>
+            </div>
+        </div>
+    </div>
+    <div style="text-align:center;">
+    </div>
+</body>
+
+</html>

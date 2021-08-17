@@ -3,9 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>贪吃蛇</title>
-    <link rel="stylesheet" type="text/css" href="text.css">
+    <title>SnaKe</title>
+    <link rel="stylesheet" type="text/css" href="test.css">
     <script src="game.js">
+    </script>
+    <script src="echarts.min.js">
     </script>
 </head>
 
@@ -17,38 +19,16 @@
         <div id="help">
             <div id="mark">得分：<span id="mark_con"></span></div>
             <div id="helper">
-                <table>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <button οnclick="keydown(38);">上</button>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button οnclick="keydown(37);">左</button>
-                        </td>
-                        <td>
-                            <button οnclick="keydown(80);" id="pause">暂停</button>
-                        </td>
-                        <td>
-                            <button οnclick="keydown(39);">右</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <button οnclick="keydown(40);">下</button>
-                        </td>
-                        <td></td>
-                    </tr>
-                </table><a href="index.html">再玩一次</a>
+                <a href="index.html">返回</a>
+                <br>
+                <a href="test.html">再来一次</a>
             </div>
+            <div class="s" id="main" style="width: 400px;height: 300px;">
         </div>
+        </div>
+        
     </div>
-    <div style="text-align:center;">
-    </div>
+
 </body>
 
 </html>

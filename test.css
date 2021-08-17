@@ -1,0 +1,55 @@
+.t{
+    text-align: center;
+    font-size: x-large;
+    font-style: oblique;
+    margin-top: 20%;
+}
+
+.s{
+    margin-top: 100px;
+}
+
+.b{
+    background-image: url(F09725F6A0F3679927BF3D800FFFC991.jpg);
+    background-size: cover;
+    width:100%;
+    height:auto;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft YaHei";
+}
+
+#page {
+    margin-right: auto;
+    margin-left: 100px;
+    margin-top: 70px;
+    height: 600px;
+    width: 1200px;
+}
+
+#yard {
+    height: 600px;
+    width: 800px;
+    border: 1px solid gray;
+    box-shadow: 0 0 10px black;
+    float: right;
+}
+
+#mark {
+    font-weight: 800;
+}
+
+#mark_con {
+    color: red;
+}
+
+/* button {
+    width: 50px;
+} */
+
+a {
+    text-decoration: none;
+}

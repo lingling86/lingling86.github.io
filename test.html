@@ -11,7 +11,8 @@
     </script>
 </head>
 
-<body>
+<body class="box">
+    <audio autoplay="autoplay" loop="loop" preload="auto" controls="controls" src="陈致逸,HOYO-MiX - Invitation of Windblume 风花的邀约.mp3"></audio>
     <div id="page">
         <div id="yard">
             <canvas id="canvas" height="600px" width="800px"></canvas>
@@ -19,9 +20,11 @@
         <div id="help">
             <div id="mark">得分：<span id="mark_con"></span></div>
             <div id="helper">
-                <a href="index.html">返回</a>
                 <br>
-                <a href="test.html">再来一次</a>
+                <input class="button button1" type="button" value="返回" onclick="back()">
+                <br>
+                <br>
+                <input class="button button1" type="button" value="再来一次" onclick="renew()">
             </div>
             <div class="s" id="main" style="width: 400px;height: 300px;">
         </div>

@@ -189,6 +189,14 @@ function change(){
     localStorage.setItem('d',localStorage.getItem('e'));
 }
 
+function back(){
+    window.history.go(-1);
+}
+
+function renew(){
+    location.reload();
+}
+
 window.onload = function () {
     c = document.getElementById('canvas').getContext('2d');
     oMark = document.getElementById('mark_con');
